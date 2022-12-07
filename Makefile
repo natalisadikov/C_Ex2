@@ -1,25 +1,23 @@
-CC = gcc
-AR = ar
-FLAGS = -wall -c -g
-OBJECT_MAIN = main.o
-OBJECT_MAT = my_mat.o
-LIB_MAT = libmymat.a
+FLAGS =-Wall -g
+CC = gcc #if we want to change compiler
 
 all: connections
 
-connections: $(OBJECT_MAIN)  $(OBJECT_MAT) $(LIB_MAT)
-	$(CC) -o connections $(OBJECT_MAIN) -L.$(LIB_MAT)
+connections:main.o libclass.a 
+	$(CC) $(FLAGS) -o connections main.o libclass.a
 
-$(OBJECT_MAIN):
-	$(CC) $(FLAGS) main.c -o $(OBJECT_MAIN)
 
-$(OBJECT_MAT):
-		$(CC) $(FLAGS) my_mat.c -o $(OBJECT_MAT)
+main.o: main.c my_mat.h
+	$(CC) $(FLAGS) -c main.c 
 
-$(LIB_MAT):
-	$(AR) rcs $(OBJECT_MAIN)  $(OBJECT_MAT) $(LIB_MAT)
+libclass.a:my_mat.o
+	ar -rcs libclass.a my_mat.o
 
-.PHONY: clean all
 
+my_mat.o: my_mat.c my_mat.h
+	$(CC) $(FLAGS) -c my_mat.c 	
+
+
+.PHONY: clean
 clean:
-	rm -f *.o *.a "connection"
+	rm -f *.o *.a *.so connections
