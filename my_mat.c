@@ -43,26 +43,18 @@ void Floyd_Warshall_Algo() {
 void check_path(int i,int j) {
     //two same vertex or INFINITY distance between the vertex
     if (i == j || matrix[i][j] == INFINITY) {
-        printf("False");
+        printf("False\n");
     }
     else {
-        printf("True");
+        printf("True\n");
     }
 }
 
 void shortest_path(int i,int j){
     if (i == j || matrix[i][j] == INFINITY) {
-        printf("-1");
+        printf("-1\n");
     }
     else{
-        printf("%d",matrix[i][j]);
+        printf("%d\n",matrix[i][j]);
     }
 }
-
-
-
-
-
-
-
-
